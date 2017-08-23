@@ -1,4 +1,4 @@
-package com.render.Exception.queue;
+package com.render.exception.queue;
 
 
 import org.apache.commons.mail.HtmlEmail;

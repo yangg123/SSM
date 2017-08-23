@@ -1,4 +1,4 @@
-package com.render.Exception;
+package com.render.exception;
 
 /**
  * 秒杀相关的所有业务异常

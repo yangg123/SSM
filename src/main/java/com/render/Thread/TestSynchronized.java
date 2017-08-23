@@ -1,4 +1,4 @@
-package com.render.Thread;
+package com.render.thread;
 
 /**
  * 对象锁

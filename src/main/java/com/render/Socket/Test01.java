@@ -1,8 +1,7 @@
-package com.render.Socket;
+package com.render.socket;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.Arrays;
 
 /*
  * InetAddress��

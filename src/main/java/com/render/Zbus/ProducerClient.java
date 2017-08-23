@@ -1,4 +1,4 @@
-package com.render.Zbus;
+package com.render.zbus;
 
 import org.zbus.broker.Broker;
 import org.zbus.broker.BrokerConfig;
@@ -17,12 +17,12 @@ public class ProducerClient {
         config.setServerAddress("127.0.0.1:15555");
         final Broker broker = new SingleBroker(config);
 
-        Producer producer = new Producer(broker, "MyMQ");
+        Producer producer = new Producer(broker, "gangan");
         producer.createMQ(); // 如果已经确定存在，不需要创建
 
         //创建消息，消息体可以是任意binary，应用协议交给使用者
         Message msg = new Message();
-        msg.setBody("hello world");
+        msg.setBody("这个一个来自生产者的消息");
         producer.sendSync(msg);
         broker.close();
     }

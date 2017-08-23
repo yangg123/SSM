@@ -127,7 +127,7 @@
 
 	<!-- 另一个非注解的适配器 -->
 	<bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter"/>
-	<bean id="exceptionHandler" class="com.render.Exception.GlobalExceptionHandler"/>
+	<bean id="exceptionHandler" class="com.render.exception.GlobalExceptionHandler"/>
 
 	<!--<import resource="dubbo-provider.xml"/>-->
 </beans>

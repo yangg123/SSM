@@ -1,6 +1,5 @@
-package com.render.Exception;
+package com.render.exception;
 
-import com.render.Exception.queue.QueueUtil;
 import org.apache.commons.mail.HtmlEmail;
 
 import java.io.ByteArrayOutputStream;

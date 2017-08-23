@@ -1,4 +1,4 @@
-package com.render.Socket;
+package com.render.socket;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;

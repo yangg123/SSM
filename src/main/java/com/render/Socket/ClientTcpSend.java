@@ -1,13 +1,10 @@
-package com.render.Socket;
+package com.render.socket;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.util.ResourceUtils;
 
 import java.io.*;
-import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.net.URL;
 
 /**
  * Created by yg on 2017/3/23.
@@ -32,7 +29,7 @@ public class ClientTcpSend {
         FileInputStream fin = null;
         try {
             try {
-//                socket = new Socket();
+//                socket = new socket();
 //                socket.connect(new InetSocketAddress("127.0.0.1", 33456),10 * 1000);
 //                dout = new DataOutputStream(socket.getOutputStream());
 //

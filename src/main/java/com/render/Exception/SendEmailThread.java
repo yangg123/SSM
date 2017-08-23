@@ -1,6 +1,6 @@
-package com.render.Exception;
+package com.render.exception;
 
-import com.render.Exception.queue.QueueUtil;
+import com.render.exception.queue.QueueUtil;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 

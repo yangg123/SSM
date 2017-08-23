@@ -6,9 +6,9 @@ import com.ssm.pojo.Exposer;
 
 import com.ssm.pojo.SeckillExecution;
 import com.ssm.model.Seckill;
-import com.render.Exception.RepeatKillException;
-import com.render.Exception.SeckillCloseException;
-import com.render.Exception.SeckillException;
+import com.render.exception.RepeatKillException;
+import com.render.exception.SeckillCloseException;
+import com.render.exception.SeckillException;
 
 import java.util.List;
 

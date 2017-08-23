@@ -1,4 +1,4 @@
-package com.render.Thread;
+package com.render.thread;
 
 /**
  * Created by yg on 2017/3/7.

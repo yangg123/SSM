@@ -30,7 +30,7 @@ public class SimpleTriggerRunner {
 //			Scheduler scheduler = schedulerFactory.getScheduler();
 //			scheduler.scheduleJob(jobDetail, simpleTrigger);
 //			scheduler.start();
-//		} catch (Exception e) {
+//		} catch (exception e) {
 //			e.printStackTrace();
 //		}
 //
