@@ -10,9 +10,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class ZbusRpcClient {
 
     public static void main(String[] args) {
-
         ApplicationContext context = new ClassPathXmlApplicationContext("zbus-client.xml");
+
         DemoService intf = (DemoService) context.getBean("demoService");
-        System.out.println(intf.sayHello("我是干干"));
+        System.out.println(intf.sayHello("我的名字gangan"));
+
     }
 }

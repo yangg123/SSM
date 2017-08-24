@@ -13,15 +13,20 @@
         </constructor-arg>
     </bean>
 
-    <bean id="broker" class="org.zbus.broker.SingleBroker">
-        <constructor-arg>
-            <bean class="org.zbus.broker.BrokerConfig">
-                <property name="serverAddress" value="127.0.0.1:15555" />
-                <property name="maxTotal" value="20"/>
-                <!-- 这里可以增加连接池参数配置，不配置使用默认值（参考commons-pool2） -->
-            </bean>
-        </constructor-arg>
+    <!--http://git.oschina.net/63766031/zbus/-->
+    <bean id="broker" class="org.zbus.broker.ZbusBroker" destroy-method="close">
+        <constructor-arg name="brokerAddress" value="127.0.0.1:15555"/>
     </bean>
+
+    <!--<bean id="broker" class="org.zbus.broker.SingleBroker">-->
+        <!--<constructor-arg>-->
+            <!--<bean class="org.zbus.broker.BrokerConfig">-->
+                <!--<property name="brokerAddress" value="127.0.0.1:15555" />-->
+                <!--<property name="maxTotal" value="20"/>-->
+                <!--&lt;!&ndash; 这里可以增加连接池参数配置，不配置使用默认值（参考commons-pool2） &ndash;&gt;-->
+            <!--</bean>-->
+        <!--</constructor-arg>-->
+    <!--</bean>-->
 
     <!-- 默认调用了start方法，由Spring容器直接带起来注册到zbus总线上 -->
     <bean id="myrpcService" class="org.zbus.rpc.mq.Service" init-method="start">
