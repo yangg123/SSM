@@ -1,6 +1,7 @@
 package com.render.dubbo;
 
 import com.ssm.model.User;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ public class DemoServiceImpl implements DemoService {
     public String sayHello(String name) {
         return "Hello " + name;
     }
+
     public List getUsers() {
         List list = new ArrayList();
         User u1 = new User();
