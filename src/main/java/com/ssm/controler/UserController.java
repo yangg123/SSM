@@ -78,6 +78,7 @@ public class UserController extends BaseController {
 
 		model.addAttribute("user", user);
 		System.out.print("\n-------进入controller---");
+
 		return "showUser";
 	}
 

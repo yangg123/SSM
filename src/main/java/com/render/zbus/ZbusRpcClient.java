@@ -14,6 +14,8 @@ public class ZbusRpcClient {
 
         DemoService intf = (DemoService) context.getBean("demoService");
         System.out.println(intf.sayHello("我的名字gangan"));
-
     }
 }
+
+//客户端-消费者
+//服务端-生成者-提供者

@@ -25,6 +25,5 @@ public class Consumer {
                 System.out.println(list.get(i));
             }
         }
-        System.in.read();
     }
 }

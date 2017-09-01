@@ -3,12 +3,13 @@
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
 	   xmlns:context="http://www.springframework.org/schema/context"
 	   xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:cache="http://www.springframework.org/schema/cache"
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans
                         http://www.springframework.org/schema/beans/spring-beans-3.1.xsd  
                         http://www.springframework.org/schema/context  
                         http://www.springframework.org/schema/context/spring-context-3.1.xsd  
                         http://www.springframework.org/schema/mvc  
-                        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+                        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
 	<!-- enable autowire -->
 	<context:annotation-config />
 	<!-- 自动扫描 -->
@@ -26,22 +27,22 @@
 		<property name="username" value="${username}" />
 		<property name="password" value="${password}" />
 		<!-- 初始化连接大小 -->
-		<property name="initialSize" value="${initialSize}"></property>
+		<property name="initialSize" value="${initialSize}"/>
 		<!-- 连接池最大数量 -->
-		<property name="maxActive" value="${maxActive}"></property>
+		<property name="maxActive" value="${maxActive}"/>
 		<!-- 连接池最大空闲 -->
-		<property name="maxIdle" value="${maxIdle}"></property>
+		<property name="maxIdle" value="${maxIdle}"/>
 		<!-- 连接池最小空闲 -->
-		<property name="minIdle" value="${minIdle}"></property>
+		<property name="minIdle" value="${minIdle}"/>
 		<!-- 获取连接最大等待时间 -->
-		<property name="maxWait" value="${maxWait}"></property>
+		<property name="maxWait" value="${maxWait}"/>
 	</bean>
 
 	<!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<!-- 自动扫描mapping.xml文件 -->
-		<property name="mapperLocations" value="classpath:mapping/*.xml"></property>
+		<property name="mapperLocations" value="classpath:mapping/*.xml"/>
 		<property name="configLocation" value="classpath:mybatis/mybatis-config.xml" />
 		<!--扫描entity包,使用别名,多个用;隔开-->
 		<property name="typeAliasesPackage" value="com.ssm.model"/>
@@ -50,7 +51,7 @@
 	<!-- DAO接口所在包名，Spring会自动查找其下的类 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.ssm.dao" />
-		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
 	</bean>
 
 	<!-- 定义事务管理器（声明式的事务） -->
@@ -62,10 +63,42 @@
 	<!--配置基于注解的声明式事务 默认使用注解来管理事务行为-->
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 
-	<!--redisDao-->
+
+	<!--redisDao 旧实例化方法一 -->
+	<!--<bean id="redisDaoOld" class="com.render.cache.RedisDao">-->
+		<!--<constructor-arg index="0" value="localhost"/>-->
+		<!--<constructor-arg index="1" value="6379"/>-->
+	<!--</bean>-->
+
+
+	<!--redisDao 新实例化方法一 -->
 	<bean id="redisDao" class="com.render.cache.RedisDao">
-		<constructor-arg index="0" value="localhost"/>
-		<constructor-arg index="1" value="6379"/>
+		<property name="redisManager" ref="redisManager"/>
+	</bean>
+
+	<!-- redisManager 管理类 -->
+	<bean id="redisManager" class="com.render.cache.RedisManager">
+		<property name="host" value="127.0.0.1"/>
+		<property name="port" value="6379"/>
+		<property name="expire" value="18000"/>
+		<!-- optional properties:
+        <property name="timeout" value="10000"/>
+        <property name="password" value="123456"/>
+        -->
+	</bean>
+
+
+
+
+	<!--ehcache-->
+	<cache:annotation-driven cache-manager="cacheManager" />
+
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+		<property name="cacheManager" ref="ehcache"/>
+	</bean>
+
+	<bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation" value="classpath:ehcache.xml"/>
 	</bean>
 
 </beans>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="ehcache.xsd"
+         updateCheck="false" monitoring="autodetect"
+         dynamicConfig="true">
+         
+    <diskStore path="user.home"/>
+    
+    <!--
+    Default Cache configuration. These settings will be applied to caches
+    created programmatically using CacheManager.add(String cacheName).
+    This element is optional, and using CacheManager.add(String cacheName) when
+    its not present will throw CacheException
+
+    The defaultCache has an implicit name "default" which is a reserved cache name.
+    -->
+    <defaultCache
+           maxEntriesLocalHeap="10000"
+           eternal="false"
+           overflowToDisk="true"
+           timeToIdleSeconds="20"
+           timeToLiveSeconds="60">
+    </defaultCache>
+
+    <!--存放管理员登陆信息有效期一天-->
+    <cache name="staffs"
+           maxElementsInMemory="10000"
+           maxElementsOnDisk="100000"
+           eternal="false"
+           timeToIdleSeconds="86400"
+           timeToLiveSeconds="0"
+           overflowToDisk="true"
+           diskPersistent="true"
+            />
+
+    <cache name="area"
+           maxElementsInMemory="10000"
+           maxElementsOnDisk="100000"
+           eternal="false"
+           timeToIdleSeconds="864000"
+           timeToLiveSeconds="0"
+           overflowToDisk="true"
+           diskPersistent="true"
+    />
+
+    <cache name="user"
+           maxElementsInMemory="10000"
+           maxElementsOnDisk="100000"
+           eternal="false"
+           timeToIdleSeconds="300"
+           timeToLiveSeconds="0"
+           overflowToDisk="true"
+           diskPersistent="true"
+    />
+
+</ehcache>

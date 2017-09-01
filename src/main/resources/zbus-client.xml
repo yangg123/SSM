@@ -7,12 +7,12 @@
         <constructor-arg name="brokerAddress" value="127.0.0.1:15555"/>
     </bean>
 
-    <!--<bean id="broker" class="org.zbus.broker.SingleBroker">-->
-        <!--<constructor-arg>-->
-            <!--<bean class="org.zbus.broker.BrokerConfig">-->
-                <!--<property name="brokerAddress" value="127.0.0.1:15555" />-->
-            <!--</bean>-->
-        <!--</constructor-arg>-->
+       <!--<bean id="broker" class="org.zbus.broker.SingleBroker">-->
+    <!--<constructor-arg>-->
+    <!--<bean class="org.zbus.broker.BrokerConfig">-->
+    <!--<property name="brokerAddress" value="127.0.0.1:15555" />-->
+    <!--</bean>-->
+    <!--</constructor-arg>-->
     <!--</bean>-->
 
     <bean id="myrpc" class="org.zbus.rpc.RpcFactory">

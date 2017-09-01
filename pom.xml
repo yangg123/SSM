@@ -96,12 +96,31 @@
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.2.2</version>
 		</dependency>
-		<!-- JSTL标签类 -->
+
+		<!--3.Servlet web相关依赖-->
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+			<version>1.1.2</version>
+		</dependency>
 		<dependency>
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.5.4</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+
+
+
 		<!-- 日志文件管理包 -->
 		<!-- log start -->
 		<dependency>
@@ -196,8 +215,6 @@
 		</dependency>
 
 
-
-
 		<!--prostuff序列化依赖-->
 		<dependency>
 			<groupId>com.dyuproject.protostuff</groupId>
@@ -211,12 +228,20 @@
 			<version>1.0.8</version>
 		</dependency>
 
-		<!--添加redis依赖-->
+
+		<!--Redis start -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-redis</artifactId>
+			<version>1.6.1.RELEASE</version>
+		</dependency>
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
 			<version>2.7.3</version>
 		</dependency>
+		<!--Redis end -->
+
 
 		<dependency>
 			<groupId>com.swetake</groupId>
@@ -284,6 +309,14 @@
 			<groupId>com.github.sgroschupf</groupId>
 			<artifactId>zkclient</artifactId>
 			<version>0.1</version>
+		</dependency>
+
+
+		<!-- ehcache 相关依赖  -->
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache-core</artifactId>
+			<version>2.5.2</version>
 		</dependency>
 
 	</dependencies>

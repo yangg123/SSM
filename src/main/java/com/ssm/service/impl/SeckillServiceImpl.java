@@ -51,18 +51,25 @@ public class SeckillServiceImpl implements SeckillService
     public Seckill getById(long seckillId) {
         return seckillDao.queryById(seckillId);
     }
+
     public Exposer exportSeckillUrl(long seckillId) {
 
-        //优化点:缓存优化:超时的基础上维护一致性
-        //1。访问redis
+        logger.info("=============1");
 
+        //优化点:缓存优化:超时的基础上维护一致性
+
+        //1。访问redis
         Seckill seckill = redisDao.getSeckill(seckillId);
         if (seckill == null) {
+            System.out.println("----------------2");
             //2.访问数据库
             seckill = seckillDao.queryById(seckillId);
             if (seckill == null) {//说明查不到这个秒杀产品的记录
+                System.out.println("----------------3");
                 return new Exposer(false, seckillId);
             } else {
+
+                logger.info("=============4");
                 //3,放入redis
                 redisDao.putSeckill(seckill);
             }
