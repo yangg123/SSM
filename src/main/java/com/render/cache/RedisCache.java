@@ -8,26 +8,26 @@ import org.apache.ibatis.cache.CacheException;
  */
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-public class RedisCache<K,V> {
+public class RedisCache {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
-    private RedisManager cache;
+    private RedisManager redisManager;
     public RedisManager getCache() {
-        return cache;
+        return redisManager;
     }
     public void setCache(RedisManager cache) {
-        this.cache = cache;
+        this.redisManager = cache;
     }
 
     /**
      * 通过JedisManager 获取 RedisCache
-     * @param cache
+     * @param redisManager
      */
-    public RedisCache(RedisManager cache){
-        if(cache==null){
+    public RedisCache(RedisManager redisManager){
+        if(redisManager==null){
             throw new IllegalArgumentException("Cache argument cannot be null.");
         }
-        this.cache=cache;
+        this.redisManager=redisManager;
     }
     /**
      * Constructs a cache instance with the specified
@@ -35,15 +35,12 @@ public class RedisCache<K,V> {
      * @param cache The cache manager instance
      * @param prefix The Redis key prefix
      */
-    public RedisCache(RedisManager cache, String prefix){
-        this(cache);
-    }
     /**
      * 获取redis中的数据
      * @param key
      * @return
      */
-    private byte[] getByteKey(K key){
+    private byte[] getByteKey(Object key){
         if(key instanceof String){
             String preKey=key+"";
             return preKey.getBytes();
@@ -51,44 +48,37 @@ public class RedisCache<K,V> {
             return SerializeUtils.serialize(key);
         }
     }
-    public V get(K key) throws CacheException{
+    public <T> T get(Object key) throws CacheException {
         logger.debug("通过key从redis中获取数据。key【"+key+"】");
         try {
             if(key == null){
                 return null;
             }else{
-                byte[] rawValue=cache.get(getByteKey(key));
+                byte[] rawValue=redisManager.get(getByteKey(key));
                 @SuppressWarnings("unchecked")
-                V value =(V)SerializeUtils.deserialize(rawValue);
+                T value =(T)SerializeUtils.deserialize(rawValue);
                 return value;
             }
         } catch (Throwable t) {
             throw new CacheException(t);
         }
-
     }
+
     /**
      * put
      */
-    public V put(K key,V value)throws CacheException{
-        logger.debug("redis put方法》》key:"+key);
-        try {
-            cache.set(getByteKey(key), SerializeUtils.serialize(value));
-            return value;
-        } catch (Throwable t) {
-            throw new CacheException(t);
-        }
+    public String set(Object key, Object value)throws CacheException {
+        logger.info("redis put方法》》key:"+key);
+        return redisManager.set(getByteKey(key), SerializeUtils.serialize(value));
     }
 
     /**
      * remove
      */
-    public V remove(K key)throws CacheException{
+    public void remove(Object key)throws CacheException {
         logger.debug("redis remove方法》》key:"+key);
         try {
-            V previous = get(key);
-            cache.del(getByteKey(key));
-            return previous;
+            redisManager.del(getByteKey(key));
         } catch (Throwable e) {
             throw new CacheException(e);
         }
@@ -99,7 +89,7 @@ public class RedisCache<K,V> {
     public void clear() throws CacheException{
         logger.debug("redis clear方法》》");
         try {
-            cache.flushDB();
+            redisManager.flushDB();
         } catch (Throwable t) {
             throw new CacheException(t);
         }
@@ -110,7 +100,7 @@ public class RedisCache<K,V> {
      */
     public int size() {
         try {
-            Long longSize = new Long(cache.dbSize());
+            Long longSize = new Long(redisManager.dbSize());
             return longSize.intValue();
         } catch (Throwable t) {
             throw new CacheException(t);

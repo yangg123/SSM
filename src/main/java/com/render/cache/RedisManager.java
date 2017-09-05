@@ -28,12 +28,11 @@ public class RedisManager {
     /** 客户端连接 */
     private static JedisPool jedisPool=null;
 
-    public RedisManager() {}
-
     /**
      * redis连接初始化
      */
-    public void init(){
+
+    public RedisManager(){
 
         if(jedisPool== null){
 
@@ -68,17 +67,18 @@ public class RedisManager {
      * @param value
      * @return
      */
-    public byte[] set(byte[] key,byte[] value) {
+    public String set(byte[] key,byte[] value) {
+
         Jedis jedis = jedisPool.getResource();
         try {
-            jedis.set(key, value);
             if(this.expire !=0){//设置过期时间
                 jedis.expire(key, this.expire);
             }
+            return jedis.set(key, value);
         } catch (Exception e) {
             logger.info("redis set 数据失败》》",e);
         }
-        return value;
+        return null;
     }
     /**
      * redis set
@@ -87,19 +87,18 @@ public class RedisManager {
      * @param expire
      * @return
      */
-    public byte[] set(byte[] key,byte[] value, int expire) {
+    public String set(byte[] key,byte[] value, int expire) {
 
+        Jedis jedis = jedisPool.getResource();
         try {
-            Jedis jedis = jedisPool.getResource();
-            jedis.set(key, value);
             if(expire !=0){ //设置过期时间
                 jedis.expire(key, expire);
             }
+            return jedis.set(key, value);
         } catch (Exception e) {
             logger.info("redis set 数据失败》》",e);
         }
-
-        return value;
+        return null;
     }
     /**
      * redis del

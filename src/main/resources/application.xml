@@ -88,8 +88,6 @@
 	</bean>
 
 
-
-
 	<!--ehcache-->
 	<cache:annotation-driven cache-manager="cacheManager" />
 
@@ -100,6 +98,13 @@
 	<bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
 		<property name="configLocation" value="classpath:ehcache.xml"/>
 	</bean>
+
+
+	<!-- 5.缓存管理器 cacheManager -->
+	<bean id="redisCache" class="com.render.cache.RedisCache">
+		<constructor-arg name="redisManager" ref="redisManager"/>
+	</bean>
+
 
 </beans>
 

@@ -1,6 +1,7 @@
 package com.ssm.controler;
 
 
+import com.render.cache.RedisCache;
 import com.ssm.pojo.Exposer;
 import com.ssm.model.Seckill;
 import com.ssm.pojo.SeckillExecution;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
@@ -27,12 +29,20 @@ public class SeckillController
     @Autowired
     private SeckillService seckillService;
 
+    @Resource
+    private RedisCache redisCache;
+
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     public String list(Model model)
     {
         //获取列表页
         List<Seckill> list=seckillService.getSeckillList();
         model.addAttribute("list",list);
+
+        redisCache.set("test","123");
+        String value = redisCache.get("test");
+        System.out.println("=======value-"+value);
+
         return "list";
     }
 

@@ -25,10 +25,7 @@ public class RedisDao {
 //    }
 
     private Logger logger= LoggerFactory.getLogger(this.getClass());
-
-    @Resource
     private RedisManager redisManager;
-
     private RuntimeSchema<Seckill> schema = RuntimeSchema.createFrom(Seckill.class);
 
 
@@ -40,7 +37,6 @@ public class RedisDao {
         //采用自定义序列化
         //protostuff: pojo.
 
-        redisManager.init();
         byte[] bytes = redisManager.get(key.getBytes());
 //                byte[] bytes = jedis.get(key.getBytes());
         //缓存重获取到
@@ -54,7 +50,7 @@ public class RedisDao {
         return null;
     }
 
-    public <T> T putSeckill(Seckill seckill) {
+    public String putSeckill(Seckill seckill) {
 
 //        Jedis jedis = jedisPool.getResource();
         String key = "seckill:" + seckill.getSeckillId();
@@ -62,14 +58,10 @@ public class RedisDao {
                 LinkedBuffer.allocate(LinkedBuffer.DEFAULT_BUFFER_SIZE));
         //超时缓存
         int timeout = 60 * 60;//1小时
-        redisManager.init();
-        byte[] bytes1 = redisManager.set(key.getBytes(),bytes,timeout);
-        logger.info("-------------bytes1"+bytes1);
+        return redisManager.set(key.getBytes(),bytes,timeout);
 
         //return bytes1;
 //                return jedis.setex(key.getBytes(),timeout,bytes);
-
-        return null;
     }
 
     public RedisManager getRedisManager() {
