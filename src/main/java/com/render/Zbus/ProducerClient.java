@@ -14,7 +14,7 @@ public class ProducerClient {
     public static void main(String[] args) throws Exception {
         //创建Broker代理
         BrokerConfig config = new BrokerConfig();
-        config.setBrokerAddress("127.0.0.1:15555");
+        config.setBrokerAddress("101.132.77.170:15555");
         final Broker broker = new SingleBroker(config);
 
         Producer producer = new Producer(broker, "gangan");

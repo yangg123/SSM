@@ -1,5 +1,6 @@
 package com.render.cache;
 
+import com.render.kit.PropKit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
@@ -16,7 +17,7 @@ public class RedisManager {
     private static Logger logger= LoggerFactory.getLogger(RedisManager.class);
 
     /** 连接Ip */
-    private String host="127.0.0.1";
+    private String host = "";
     /** 端口号 */
     private int port = 6379;
     /** 过期时间 （0：永不过期） */
@@ -31,13 +32,12 @@ public class RedisManager {
     /**
      * redis连接初始化
      */
-
     public RedisManager(){
 
         if(jedisPool== null){
 
             if(password!=null && !"".equals(password)){
-                jedisPool=new JedisPool(new JedisPoolConfig(),host,port,timeout,password);
+                jedisPool=new JedisPool(new JedisPoolConfig(),host,port,timeout,password,10);
             }else if(timeout!=0){
                 jedisPool=new JedisPool(new JedisPoolConfig(),host,port,timeout);
             }else{

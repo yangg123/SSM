@@ -14,7 +14,7 @@ public class ZbusRpcServer {
 
     public static void main(String[] args) throws Exception {
         BrokerConfig config = new BrokerConfig();
-        config.setBrokerAddress("127.0.0.1:15555");
+        config.setBrokerAddress("101.132.77.170:15555");
         Broker broker = new SingleBroker(config);
 
         //2)创建基于MQ的Invoker以及Rpc工厂，指定RPC采用的MQ为MyRpc

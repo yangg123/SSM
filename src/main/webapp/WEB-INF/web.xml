@@ -73,7 +73,7 @@
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>classpath:spring-mvc.xml</param-value>
-			<!--<param-value>classpath:applicationContext.xml</param-value>--> 这个和上面一样
+			<!--<param-value>classpath:applicationContext.xml</param-value> 这个和上面一样-->
 		</init-param>
 
 		<!-- 启动顺序，数字越小，启动越早 -->

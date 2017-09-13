@@ -19,7 +19,7 @@ public class ComsumerServer {
 
         //创建Broker代表
         BrokerConfig brokerConfig = new BrokerConfig();
-        brokerConfig.setBrokerAddress("127.0.0.1:15555");
+        brokerConfig.setBrokerAddress("101.132.77.170:15555");
         Broker broker = new SingleBroker(brokerConfig);
 
         MqConfig config = new MqConfig();

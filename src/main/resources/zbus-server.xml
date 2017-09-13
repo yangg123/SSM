@@ -3,6 +3,11 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:jdbc.properties" />
+    </bean>
+
     <bean id="demoService" class="com.render.dubbo.DemoServiceImpl"></bean>
     <bean id="serviceProcessor" class="org.zbus.rpc.RpcProcessor">
         <constructor-arg>
@@ -15,7 +20,7 @@
 
     <!--http://git.oschina.net/63766031/zbus/-->
     <bean id="broker" class="org.zbus.broker.ZbusBroker" destroy-method="close">
-        <constructor-arg name="brokerAddress" value="127.0.0.1:15555"/>
+        <constructor-arg name="brokerAddress" value="${zbusIp}"/>
     </bean>
 
     <!--<bean id="broker" class="org.zbus.broker.SingleBroker">-->

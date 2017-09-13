@@ -8,7 +8,7 @@
                         http://www.springframework.org/schema/beans/spring-beans-3.1.xsd  
                         http://www.springframework.org/schema/context  
                         http://www.springframework.org/schema/context/spring-context-3.1.xsd  
-                        http://www.springframework.org/schema/mvc  
+                        http://www.springframework.org/schema/mvc
                         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
 	<!-- enable autowire -->
 	<context:annotation-config />
@@ -78,13 +78,11 @@
 
 	<!-- redisManager 管理类 -->
 	<bean id="redisManager" class="com.render.cache.RedisManager">
-		<property name="host" value="127.0.0.1"/>
+		<property name="host" value="${redisUrl}"/>
 		<property name="port" value="6379"/>
 		<property name="expire" value="18000"/>
-		<!-- optional properties:
         <property name="timeout" value="10000"/>
-        <property name="password" value="123456"/>
-        -->
+        <property name="password" value="${redisPassword}"/>
 	</bean>
 
 

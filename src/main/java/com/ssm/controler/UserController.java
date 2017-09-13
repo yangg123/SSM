@@ -64,7 +64,7 @@ public class UserController extends BaseController {
 	@RequestMapping("/showUser") // 第一种，返回类型为String
 	public String toIndex(HttpServletRequest request,Model model) {
 
-		String cdn = this.propKit.getProperty("cdn");
+		String cdn = ("cdn");
 		logger.info("\n----cdn is {}",cdn);
 
 		HashMap<String, Object> parameters = getRequestMapSingle(request);
