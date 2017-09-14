@@ -1,6 +1,5 @@
 package com.render.cache;
 
-import com.render.kit.PropKit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
@@ -17,30 +16,31 @@ public class RedisManager {
     private static Logger logger= LoggerFactory.getLogger(RedisManager.class);
 
     /** 连接Ip */
-    private String host = "";
+    private String host;
     /** 端口号 */
-    private int port = 6379;
+    private int port;
     /** 过期时间 （0：永不过期） */
     private int expire=0;
     /** 连接redis server时间，In milliseconds  */
-    private int timeout=0;
+    private int timeout;
     /** 密码 */
-    private String password="";
+    private String password;
+
     /** 客户端连接 */
-    private static JedisPool jedisPool=null;
+    private static JedisPool jedisPool;
 
     /**
      * redis连接初始化
      */
-    public RedisManager(){
+    public void init(){
 
         if(jedisPool== null){
 
             if(password!=null && !"".equals(password)){
                 jedisPool=new JedisPool(new JedisPoolConfig(),host,port,timeout,password,10);
-            }else if(timeout!=0){
+            } else if(timeout!=0){
                 jedisPool=new JedisPool(new JedisPoolConfig(),host,port,timeout);
-            }else{
+            } else {
                 jedisPool=new JedisPool(new JedisPoolConfig(),host,port);
             }
         }
@@ -52,6 +52,8 @@ public class RedisManager {
      * @return
      */
     public byte[] get(byte[] key) {
+
+        init();
         byte[]  value = null;
         Jedis jedis=jedisPool.getResource();
         try {
@@ -69,6 +71,7 @@ public class RedisManager {
      */
     public String set(byte[] key,byte[] value) {
 
+        init();
         Jedis jedis = jedisPool.getResource();
         try {
             if(this.expire !=0){//设置过期时间

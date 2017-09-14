@@ -1,8 +1,10 @@
 package com.ssm.controler;
 
+import com.render.cache.RedisCache;
 import com.render.kit.PathKit;
 import com.render.kit.QRCodeUtil;
 import com.render.kit.QiniuKit;
+import com.ssm.model.Person;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.File;
@@ -27,6 +30,15 @@ import java.util.Map;
 public class IndexController {
 
     private static Logger log = LoggerFactory.getLogger(UserController.class);
+
+    @Resource
+    private Person person;
+
+    @RequestMapping(value="/test")
+    public String test() {
+        System.out.println("============ person name:" + person.getName());
+        return "upload_file_test_page";
+    }
 
     // 七牛token
     @RequestMapping(value="/qiniuToken")

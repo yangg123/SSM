@@ -18,6 +18,9 @@ public abstract class BaseController {
 
     protected static Logger logger = LoggerFactory.getLogger(BaseController.class);
     protected static PropKit propKit = new PropKit("jdbc.properties");
+    protected HttpServletRequest request;
+    protected HttpServletResponse response;
+    protected HttpSession session;
 
     /**
      * 获取请求属性封装为Map类型
@@ -34,9 +37,6 @@ public abstract class BaseController {
         return conditions;
     }
 
-    protected HttpServletRequest request;
-    protected HttpServletResponse response;
-    protected HttpSession session;
 
     @ModelAttribute
     public void setReqAndRes(HttpServletRequest request, HttpServletResponse response){

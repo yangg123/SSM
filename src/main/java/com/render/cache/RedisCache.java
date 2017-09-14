@@ -29,25 +29,13 @@ public class RedisCache {
         }
         this.redisManager=redisManager;
     }
-    /**
-     * Constructs a cache instance with the specified
-     * Redis manager and using a custom key prefix.
-     * @param cache The cache manager instance
-     * @param prefix The Redis key prefix
-     */
+
     /**
      * 获取redis中的数据
      * @param key
      * @return
      */
-    private byte[] getByteKey(Object key){
-        if(key instanceof String){
-            String preKey=key+"";
-            return preKey.getBytes();
-        }else{
-            return SerializeUtils.serialize(key);
-        }
-    }
+
     public <T> T get(Object key) throws CacheException {
         logger.debug("通过key从redis中获取数据。key【"+key+"】");
         try {
@@ -104,6 +92,15 @@ public class RedisCache {
             return longSize.intValue();
         } catch (Throwable t) {
             throw new CacheException(t);
+        }
+    }
+
+    private byte[] getByteKey(Object key){
+        if(key instanceof String){
+            String preKey=key+"";
+            return preKey.getBytes();
+        }else{
+            return SerializeUtils.serialize(key);
         }
     }
 }

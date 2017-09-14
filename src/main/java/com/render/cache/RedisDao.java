@@ -25,9 +25,18 @@ public class RedisDao {
 //    }
 
     private Logger logger= LoggerFactory.getLogger(this.getClass());
-    private RedisManager redisManager;
+
     private RuntimeSchema<Seckill> schema = RuntimeSchema.createFrom(Seckill.class);
 
+    private RedisManager redisManager;
+
+    public RedisManager getRedisManager() {
+        return redisManager;
+    }
+
+    public void setRedisManager(RedisManager redisManager) {
+        this.redisManager = redisManager;
+    }
 
     public Seckill getSeckill(long seckillId) {
 
@@ -62,13 +71,5 @@ public class RedisDao {
 
         //return bytes1;
 //                return jedis.setex(key.getBytes(),timeout,bytes);
-    }
-
-    public RedisManager getRedisManager() {
-        return redisManager;
-    }
-
-    public void setRedisManager(RedisManager redisManager) {
-        this.redisManager = redisManager;
     }
 }
